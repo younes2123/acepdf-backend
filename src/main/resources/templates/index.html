@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AcePDF Kernel - Merge PDFs</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f7f9;
+        color: #333;
+      }
+      .container {
+        text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 90%;
+      }
+      h1 {
+        color: #1a202c;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #5a677d;
+        margin-bottom: 30px;
+      }
+      .upload-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      input[type='file'] {
+        border: 2px dashed #dbe1e6;
+        border-radius: 6px;
+        padding: 30px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+      }
+      input[type='file']:hover {
+        border-color: #4a90e2;
+      }
+      button {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      button:hover {
+        background-color: #357abd;
+      }
+      .error {
+        color: #e53e3e;
+        background-color: #fff5f5;
+        border: 1px solid #fc8181;
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>AcePDF Kernel</h1>
+      <p>
+        The simple, working system. Upload two or more PDFs to combine them into
+        a single file.
+      </p>
+
+      <form
+        class="upload-form"
+        method="POST"
+        action="/merge"
+        enctype="multipart/form-data"
+      >
+        <input
+          type="file"
+          name="files"
+          required
+          multiple
+          accept="application/pdf"
+        />
+        <button type="submit">Merge PDFs</button>
+      </form>
+
+      <!-- Display error message if one exists -->
+      <div th:if="${error}" class="error" th:text="${error}"></div>
+    </div>
+  </body>
+</html>
